@@ -1,5 +1,13 @@
+html{
+  font-size:16px;
+
+}
 .App {
   text-align: center;
+}
+body{
+  font-family: 'Nunito Sans', sans-serif;
+  color:#111517;
 }
 
 .App-logo {
