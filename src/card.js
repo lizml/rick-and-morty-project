@@ -30,17 +30,17 @@ function Card({
     photo,
     name,
     status,
-    location,
-    episode,
+    species,
+    gender,
 }) {
     return (
         <CardStyled>
-            <img src= {photo} alt=""/>
+            <img loading = "lazy" src= {photo} alt=""/>
             <div className = "details">
                 <h2>{name}</h2>
                 <p><strong>Status:</strong>{status}</p>
-                <p><strong>Location:</strong>{location}</p>
-                <p><strong>Episode</strong>{episode}</p>
+                <p><strong>Species:</strong>{species}</p>
+                <p><strong>Gender:</strong>{gender}</p>
             </div>
             
         </CardStyled>

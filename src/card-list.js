@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useState} from 'react';
 import styled from 'styled-components'
 import Card from './card'
 const CardListStyled = styled.div`
@@ -10,29 +10,38 @@ padding:4em 2em;
 
 `
 function CardList() {
-    useEffect(()=>{
-        fetch('https://rickandmortyapi.com/api/character/')
-        .then((response)=>{
-            return response.json()
-        })
-        .then((data)=>{
-            console.log(data)
-        })
-        .catch(()=>{
-            console.log('hay un error')
-        })
-    },[])
-
+    const[cardList, setCardList] = useState([])
+    async function fetchApi() {
+        const response = await fetch(`https://rickandmortyapi.com/api/character/`)
+        const data = await response.json()
+        return data
+      }
+     
+    
+      useEffect(() => {
+        fetchApi()
+        .then(res => {
+          setCardList(res.results)
+        }).catch(err => {console.log(err)})
+      }, []);
+            
     return (
         <CardListStyled>
-            Cardlist
-            <Card
-                photo = "https://www.kindpng.com/picc/m/102-1022311_transparent-rick-and-morty-clipart-rick-and-morty.png"
-                name = "Rick"
-                status = "alive"
-                location = "Earth"
-                episode = {16}
-            />      
+           { 
+                cardList && cardList.map((card)=>{
+                     return( 
+                        <Card 
+                            key = {card.id}
+                            photo = {card.image}
+                            name = {card.name}
+                            status = {card.status}
+                            species = {card.species}
+                            gender = {card.gender}
+                        />  
+                     )
+                    
+                 })
+            }
         </CardListStyled>
     )
 }
